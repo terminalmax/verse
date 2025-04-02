@@ -1,16 +1,13 @@
 # verse
-
 Verse is a TUI bible viewer written in Rust.
 
+## What it looks like
+[YT Video](https://www.youtube.com/watch?v=ERaBQVz__Ms)
 
 ## Usage
-Make sure that the database is in the same directory as the executable, then open terminal and type:
+Make sure that the database is in the same directory as the executable. Then run verse in terminal, for ex:
+(if it is added to path)
 > verse
-(if verse is not added to path, it must be called from location)
-
-## What it looks like
-[YT Video]()
-
 
 ## Limitation
 Currently only works with ASV database. Support for other translations should be easy to implement since they have the same schema.

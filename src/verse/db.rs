@@ -232,8 +232,8 @@ impl Database {
             .and_then(|path| path.parent().map(|dir| dir.join("ASV.db")))
             .expect("Could not get path to dir.");
 
-        let connection =
-            Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY).map_err(|_| ())?;
+        let connection = Connection::open_with_flags(path, OpenFlags::SQLITE_OPEN_READ_ONLY)
+            .expect("Could not connect to DB. The DB has to be in the same dir as the executable.");
 
         let mut db = Database {
             connection,
