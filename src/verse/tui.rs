@@ -49,7 +49,13 @@ impl App {
         ratatui::restore();
     }
 
-    fn update_state(&mut self, c: char) {
+    fn update_menu(&mut self, c: char) {
+        if c == 'B' {
+            self.show_book_menu = !self.show_book_menu;
+            self.book_input_string.clear();
+            return;
+        }
+
         if self.show_book_menu {
             if self.book_input_string.len() > 5 {
                 return;
@@ -81,20 +87,15 @@ impl App {
                 match key_event.code {
                     event::KeyCode::Left => self.prev_chapter(),
                     event::KeyCode::Right => self.next_chapter(),
-
                     event::KeyCode::Up => {
-                        self.current_scroll = self.current_scroll.saturating_sub(1);
+                        self.current_scroll = self.current_scroll.saturating_sub(1)
                     }
                     event::KeyCode::Down => {
-                        self.current_scroll = self.current_scroll.wrapping_add(1);
+                        self.current_scroll = self.current_scroll.wrapping_add(1)
                     }
-
+                    event::KeyCode::Esc => self.should_close = true,
                     event::KeyCode::Char('q') => self.should_close = true,
-                    event::KeyCode::Char('B') => {
-                        self.show_book_menu = !self.show_book_menu;
-                        self.book_input_string.clear();
-                    }
-                    event::KeyCode::Char(c) => self.update_state(c),
+                    event::KeyCode::Char(c) => self.update_menu(c),
                     _ => {}
                 }
             }
